@@ -5,6 +5,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     VendMachineScript vendMachineScript;
+    public ParticleSystem vendHitParticles;
 
     void Start()
     {
@@ -21,6 +22,8 @@ public class Weapon : MonoBehaviour
         if (other.tag == "Machine")
         {
             vendMachineScript = other.gameObject.GetComponent<VendMachineScript>();
+
+            vendHitParticles.Play();
 
             vendMachineScript.TakeDamage(1);
         }
