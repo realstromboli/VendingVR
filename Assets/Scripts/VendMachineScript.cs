@@ -6,17 +6,41 @@ public class VendMachineScript : MonoBehaviour
 {
 
     [Header("Variables")]
-    public int maxHealth = 21;
+    public int maxHealth = 30;
     public int currentHealth;
     public AudioClip hitSound;
     public AudioSource vendingAudio;
+    public GameObject vendingMachine;
+    public ParticleSystem vendBlastParticles;
+    public float flinchDuration = 0.3f;
+
+    public Material pristine;
+    public Material damaged1;
+    public Material damaged2;
+    public Material damaged3;
+    public Material flinch1;
+    public Material flinch2;
+    public Material flinch3;
+    public Material flinch4;
+    public Material currentIdle;
+    public Material currentFlinch;
+
+    [SerializeField] VendHPBar healthBar;
 
     void Start()
     {
         currentHealth = maxHealth;
         vendingAudio = GetComponent<AudioSource>();
+        vendingMachine.GetComponent<MeshRenderer>().material = pristine;
+        currentFlinch = flinch1;
+        currentIdle = pristine;
+        healthBar.UpdateHealthBar(currentHealth, maxHealth);
     }
 
+    private void Awake()
+    {
+        healthBar = GetComponentInChildren<VendHPBar>();
+    }
     
     void Update()
     {
@@ -29,17 +53,34 @@ public class VendMachineScript : MonoBehaviour
     public void TakeDamage(int amount)
     {
         currentHealth -= amount;
+        healthBar.UpdateHealthBar(currentHealth, maxHealth);
         //trigger hurt animations
         vendingAudio.PlayOneShot(hitSound, 1.0f);
+        vendingMachine.GetComponent<MeshRenderer>().material = currentFlinch;
+        StartCoroutine(Flinch());
 
-        if (currentHealth <= 14)
+        if (currentHealth <= 30)
         {
-            //set texture to damaged 1
+            currentIdle = pristine;
+            currentFlinch = flinch1;
         }
 
-        if (currentHealth <= 7)
+        if (currentHealth <= 20)
         {
-            //set texture to damaged 2
+            currentIdle = damaged1;
+            currentFlinch = flinch2;
+        }
+
+        if (currentHealth <= 13)
+        {
+            currentIdle = damaged2;
+            currentFlinch = flinch3;
+        }
+
+        if (currentHealth <= 6)
+        {
+            currentIdle = damaged3;
+            currentFlinch = flinch4;
         }
 
         //this is assuming there will be pristine, damaged, and heavily damaged textures for the machine
@@ -48,7 +89,8 @@ public class VendMachineScript : MonoBehaviour
         {
             //you have killed vending machine
             //explosion sfx (and pfx?)
-            //game end, reset?
+            vendBlastParticles.Play();
+            //game end, reset? something something game manager set active win screen
         }
     }
 
@@ -60,6 +102,12 @@ public class VendMachineScript : MonoBehaviour
         {
             currentHealth = maxHealth;
         }
+    }
+
+    IEnumerator Flinch()
+    {
+        yield return new WaitForSeconds(flinchDuration);
+        vendingMachine.GetComponent<MeshRenderer>().material = currentIdle;
     }
 
     //public void OnTriggerEnter(Collider other)

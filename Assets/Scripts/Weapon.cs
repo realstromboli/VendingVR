@@ -26,6 +26,11 @@ public class Weapon : MonoBehaviour
             vendHitParticles.Play();
 
             vendMachineScript.TakeDamage(1);
+
+            if (vendMachineScript.currentHealth == 1)
+            {
+                //hitAudio.PlayOneShot(boomSound, 1.0f);
+            }
         }
 
         //save for other weapon types, put on seperate script
