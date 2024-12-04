@@ -9,10 +9,16 @@ public class VendMachineScript : MonoBehaviour
     public int maxHealth = 30;
     public int currentHealth;
     public AudioClip hitSound;
+    public AudioClip dollarSound;
+    public AudioClip angerSound;
     public AudioSource vendingAudio;
     public GameObject vendingMachine;
+    public GameObject helpScreen;
     public ParticleSystem vendBlastParticles;
     public float flinchDuration = 0.3f;
+
+    public Animator vendAnimator;
+    public string[] animations;
 
     public Material pristine;
     public Material damaged1;
@@ -35,6 +41,7 @@ public class VendMachineScript : MonoBehaviour
         currentFlinch = flinch1;
         currentIdle = pristine;
         healthBar.UpdateHealthBar(currentHealth, maxHealth);
+        vendAnimator = FindObjectOfType<Animator>();
     }
 
     private void Awake()
@@ -54,7 +61,8 @@ public class VendMachineScript : MonoBehaviour
     {
         currentHealth -= amount;
         healthBar.UpdateHealthBar(currentHealth, maxHealth);
-        //trigger hurt animations
+        vendAnimator.SetInteger("AnimIndex", Random.Range(0, 3));
+        vendAnimator.SetTrigger("HitTrigger");
         vendingAudio.PlayOneShot(hitSound, 1.0f);
         vendingMachine.GetComponent<MeshRenderer>().material = currentFlinch;
         StartCoroutine(Flinch());
@@ -108,6 +116,27 @@ public class VendMachineScript : MonoBehaviour
     {
         yield return new WaitForSeconds(flinchDuration);
         vendingMachine.GetComponent<MeshRenderer>().material = currentIdle;
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Dollar")
+        {
+
+            Destroy(other.gameObject);
+
+            vendingAudio.PlayOneShot(dollarSound, 1.0f);
+
+            StartCoroutine(BigThink());
+        }
+    }
+
+    IEnumerator BigThink()
+    {
+        yield return new WaitForSeconds(3);
+        vendingAudio.PlayOneShot(angerSound, 1.0f);
+        yield return new WaitForSeconds(1);
+        helpScreen.gameObject.SetActive(true);
     }
 
     //public void OnTriggerEnter(Collider other)

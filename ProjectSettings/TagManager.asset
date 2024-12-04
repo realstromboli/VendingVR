@@ -8,6 +8,7 @@ TagManager:
   - Weapon
   - TF2Wrench
   - Machine
+  - Dollar
   layers:
   - Default
   - TransparentFX
