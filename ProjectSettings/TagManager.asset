@@ -16,6 +16,7 @@ TagManager:
   - MugWPN
   - LampWPN
   - PencilHolderWPN
+  - Coworker
   layers:
   - Default
   - TransparentFX
