@@ -5,6 +5,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     VendMachineScript vendMachineScript;
+    AINav coworkerScript;
 
     public int maxHealth;
     public int currentHealth;
@@ -42,7 +43,14 @@ public class Weapon : MonoBehaviour
             TakeDamage(1);
         }
 
-        if (gameObject.tag == "Weapon")
+        if (other.tag == "Coworker")
+        {
+            coworkerScript = other.gameObject.GetComponent<AINav>();
+            
+            coworkerScript.coworkerAudio.PlayOneShot(coworkerScript.ouch, 0.5f);
+        }
+
+        if (gameObject.tag == "Weapon" && other.tag == "Machine")
         {
             vendHitParticles.Play();
 
@@ -51,7 +59,7 @@ public class Weapon : MonoBehaviour
             vendMachineScript.vendingAudio.PlayOneShot(vendMachineScript.hitSound, 1.0f);
         }
 
-        if (gameObject.tag == "ComputerWPN")
+        if (gameObject.tag == "ComputerWPN" && other.tag == "Machine")
         {
             // for the other ones probably make other vendhits and name them after each weapon. then make other sound effects and have hp and breaking for each
             compHitParticles.Play();
@@ -62,7 +70,7 @@ public class Weapon : MonoBehaviour
             vendMachineScript.vendingAudio.PlayOneShot(vendMachineScript.bigHitSound, 0.3f);
         }
 
-        if (gameObject.tag == "MouseWPN")
+        if (gameObject.tag == "MouseWPN" && other.tag == "Machine")
         {
             // for the other ones probably make other vendhits and name them after each weapon. then make other sound effects and have hp and breaking for each
             mouseHitParticles.Play();
@@ -73,7 +81,7 @@ public class Weapon : MonoBehaviour
             vendMachineScript.vendingAudio.PlayOneShot(vendMachineScript.softHitSound, 2f);
         }
 
-        if (gameObject.tag == "KeyboardWPN")
+        if (gameObject.tag == "KeyboardWPN" && other.tag == "Machine")
         {
             // for the other ones probably make other vendhits and name them after each weapon. then make other sound effects and have hp and breaking for each
             keyboardHitParticles.Play();
@@ -84,7 +92,7 @@ public class Weapon : MonoBehaviour
             vendMachineScript.vendingAudio.PlayOneShot(vendMachineScript.legoSound, 0.7f);
         }
 
-        if (gameObject.tag == "SwordWPN")
+        if (gameObject.tag == "SwordWPN" && other.tag == "Machine")
         {
             // for the other ones probably make other vendhits and name them after each weapon. then make other sound effects and have hp and breaking for each
             swordHitParticles.Play();
@@ -95,7 +103,7 @@ public class Weapon : MonoBehaviour
             vendMachineScript.vendingAudio.PlayOneShot(vendMachineScript.slashSound, 1f);
         }
 
-        if (gameObject.tag == "MugWPN")
+        if (gameObject.tag == "MugWPN" && other.tag == "Machine")
         {
             // for the other ones probably make other vendhits and name them after each weapon. then make other sound effects and have hp and breaking for each
             mugHitParticles.Play();
@@ -106,7 +114,7 @@ public class Weapon : MonoBehaviour
             vendMachineScript.vendingAudio.PlayOneShot(vendMachineScript.mugSound, 0.2f);
         }
 
-        if (gameObject.tag == "LampWPN")
+        if (gameObject.tag == "LampWPN" && other.tag == "Machine")
         {
             // for the other ones probably make other vendhits and name them after each weapon. then make other sound effects and have hp and breaking for each
             lampHitParticles.Play();
@@ -117,7 +125,7 @@ public class Weapon : MonoBehaviour
             vendMachineScript.vendingAudio.PlayOneShot(vendMachineScript.pipeSound, 0.12f);
         }
 
-        if (gameObject.tag == "PencilHolderWPN")
+        if (gameObject.tag == "PencilHolderWPN" && other.tag == "Machine")
         {
             vendHitParticles.Play();
 
@@ -126,7 +134,7 @@ public class Weapon : MonoBehaviour
             vendMachineScript.vendingAudio.PlayOneShot(vendMachineScript.hitSound, 1.0f);
         }
 
-        if (gameObject.tag == "TF2Wrench")
+        if (gameObject.tag == "TF2Wrench" && other.tag == "Machine")
         {
             healParticles.Play();
             

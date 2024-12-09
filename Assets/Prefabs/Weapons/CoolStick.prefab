@@ -148,9 +148,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4b7146a7b146d842ab9e6850a0ce0aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vendHitParticles: {fileID: 0}
   maxHealth: 9999
   currentHealth: 0
+  vendHitParticles: {fileID: 0}
+  healParticles: {fileID: 0}
+  compHitParticles: {fileID: 0}
+  mouseHitParticles: {fileID: 0}
+  keyboardHitParticles: {fileID: 0}
+  swordHitParticles: {fileID: 0}
+  mugHitParticles: {fileID: 0}
+  lampHitParticles: {fileID: 0}
 --- !u!114 &2928328598320919336
 MonoBehaviour:
   m_ObjectHideFlags: 0
