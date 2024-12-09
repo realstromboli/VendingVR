@@ -31,7 +31,7 @@ public class VendMachineScript : MonoBehaviour
     public Material currentIdle;
     public Material currentFlinch;
 
-    [SerializeField] VendHPBar healthBar;
+    [SerializeField] public VendHPBar healthBar;
 
     void Start()
     {
@@ -41,7 +41,7 @@ public class VendMachineScript : MonoBehaviour
         currentFlinch = flinch1;
         currentIdle = pristine;
         healthBar.UpdateHealthBar(currentHealth, maxHealth);
-        vendAnimator = FindObjectOfType<Animator>();
+        vendAnimator = GetComponent<Animator>();
     }
 
     private void Awake()
