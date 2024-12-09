@@ -8,9 +8,7 @@ public class VendMachineScript : MonoBehaviour
     [Header("Variables")]
     public int maxHealth = 30;
     public int currentHealth;
-    public AudioClip hitSound;
-    public AudioClip dollarSound;
-    public AudioClip angerSound;
+    
     public AudioSource vendingAudio;
     public GameObject vendingMachine;
     public GameObject helpScreen;
@@ -30,6 +28,18 @@ public class VendMachineScript : MonoBehaviour
     public Material flinch4;
     public Material currentIdle;
     public Material currentFlinch;
+
+    [Header("SFX")]
+    public AudioClip hitSound;
+    public AudioClip dollarSound;
+    public AudioClip angerSound;
+    public AudioClip fixSound;
+    public AudioClip bigHitSound;
+    public AudioClip softHitSound;
+    public AudioClip legoSound;
+    public AudioClip slashSound;
+    public AudioClip mugSound;
+    public AudioClip pipeSound;
 
     [SerializeField] public VendHPBar healthBar;
 
@@ -63,7 +73,6 @@ public class VendMachineScript : MonoBehaviour
         healthBar.UpdateHealthBar(currentHealth, maxHealth);
         vendAnimator.SetInteger("AnimIndex", Random.Range(0, 3));
         vendAnimator.SetTrigger("HitTrigger");
-        vendingAudio.PlayOneShot(hitSound, 1.0f);
         vendingMachine.GetComponent<MeshRenderer>().material = currentFlinch;
         StartCoroutine(Flinch());
 
@@ -105,6 +114,35 @@ public class VendMachineScript : MonoBehaviour
     public void Heal(int amount)
     {
         currentHealth += amount;
+        healthBar.UpdateHealthBar(currentHealth, maxHealth);
+
+        if (currentHealth >= 6)
+        {
+            currentIdle = damaged3;
+            currentFlinch = flinch4;
+            vendingMachine.GetComponent<MeshRenderer>().material = currentIdle;
+        }
+
+        if (currentHealth >= 13)
+        {
+            currentIdle = damaged2;
+            currentFlinch = flinch3;
+            vendingMachine.GetComponent<MeshRenderer>().material = currentIdle;
+        }
+
+        if (currentHealth >= 20)
+        {
+            currentIdle = damaged1;
+            currentFlinch = flinch2;
+            vendingMachine.GetComponent<MeshRenderer>().material = currentIdle;
+        }
+
+        if (currentHealth >= 29)
+        {
+            currentIdle = pristine;
+            currentFlinch = flinch1;
+            vendingMachine.GetComponent<MeshRenderer>().material = currentIdle;
+        }
 
         if (currentHealth > maxHealth)
         {
@@ -125,7 +163,7 @@ public class VendMachineScript : MonoBehaviour
 
             Destroy(other.gameObject);
 
-            vendingAudio.PlayOneShot(dollarSound, 1.0f);
+            vendingAudio.PlayOneShot(dollarSound, 0.8f);
 
             StartCoroutine(BigThink());
         }
@@ -134,7 +172,7 @@ public class VendMachineScript : MonoBehaviour
     IEnumerator BigThink()
     {
         yield return new WaitForSeconds(3);
-        vendingAudio.PlayOneShot(angerSound, 1.0f);
+        vendingAudio.PlayOneShot(angerSound, 0.8f);
         yield return new WaitForSeconds(1);
         helpScreen.gameObject.SetActive(true);
     }

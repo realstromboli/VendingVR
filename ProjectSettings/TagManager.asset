@@ -9,6 +9,13 @@ TagManager:
   - TF2Wrench
   - Machine
   - Dollar
+  - ComputerWPN
+  - MouseWPN
+  - KeyboardWPN
+  - SwordWPN
+  - MugWPN
+  - LampWPN
+  - PencilHolderWPN
   layers:
   - Default
   - TransparentFX
