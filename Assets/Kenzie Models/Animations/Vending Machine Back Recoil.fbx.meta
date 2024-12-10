@@ -16,7 +16,8 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
+    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
+      human bone 'LeftUpperLeg' not found\n"
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
@@ -111,7 +112,57 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: Vending Machine Back Recoil(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Vending Machine
+      parentName: Vending Machine Back Recoil(Clone)
+      position: {x: -0, y: 0.12530364, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: nurbsCircle1
+      parentName: Vending Machine Back Recoil(Clone)
+      position: {x: -0.4049825, y: -0.15665081, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 38.937176, y: 38.937176, z: 38.937176}
+    - name: nurbsCircle2
+      parentName: Vending Machine Back Recoil(Clone)
+      position: {x: -0.4049825, y: 0.12556572, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 38.937176, y: 38.937176, z: 38.937176}
+    - name: nurbsCircle3
+      parentName: Vending Machine Back Recoil(Clone)
+      position: {x: -0.4049825, y: 0.35664734, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 38.937176, y: 38.937176, z: 38.937176}
+    - name: joint1
+      parentName: Vending Machine Back Recoil(Clone)
+      position: {x: -0.4049825, y: -0.15665081, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 10, y: 10, z: 10}
+    - name: transform2
+      parentName: joint1
+      position: {x: 0.040529404, y: 0.016145518, z: 0.0013746672}
+      rotation: {x: 0.013540756, y: -0, z: -0.39922297, w: 0.9167539}
+      scale: {x: 0.1, y: 0.1, z: 0.1}
+    - name: joint2
+      parentName: transform2
+      position: {x: -0.40529403, y: 0.12076134, z: -0.01374667}
+      rotation: {x: -0.030964011, y: 0.000000012959639, z: 0.9129143, w: 0.40697524}
+      scale: {x: 10, y: 10, z: 10}
+    - name: transform1
+      parentName: joint2
+      position: {x: 0.040529404, y: -0.012529352, z: 0.0013746672}
+      rotation: {x: 0.027810527, y: -0.000000008764021, z: -0.81993985, w: 0.5717739}
+      scale: {x: 0.1, y: 0.1, z: 0.1}
+    - name: joint3
+      parentName: transform1
+      position: {x: -0.40529403, y: 0.35637513, z: -0.01374667}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 10, y: 10, z: 10}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -122,13 +173,13 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
